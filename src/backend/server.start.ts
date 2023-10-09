@@ -1,11 +1,32 @@
-import { App } from "./App";
+import express from 'express'
+import mongoose from 'mongoose'
+import {connectDB} from './Server'
+import { logger } from '../middleware/logger'
+import { notFound } from '../middleware/notFound'
+import { notesRouter } from '../controllers/notes'
+import { usersRouter } from '../controllers/users'
+import { loginRouter } from '../controllers/login'
+connectDB()
+export const app = express()
 
-try {
-	void new App().start();
-} catch (e) {
-	process.exit(1);
-}
+app.use(express.json())
+app.use(logger)
 
-process.on("uncaughtException", () => {
-	process.exit(1);
-});
+app.get('/', (_req, res) => {
+	res.send('<h1>Hello World</h1>')
+  })
+
+  app.use('/api/notes', notesRouter)
+  app.use('/api/users', usersRouter)
+  app.use('/api/login', loginRouter)
+
+  app.use(notFound)
+
+  const PORT = process.env.PORT
+  export const server = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
+
+process.on('uncaughtException', () => {
+  mongoose.connection.close()
+})

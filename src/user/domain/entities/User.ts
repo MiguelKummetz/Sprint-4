@@ -1,17 +1,17 @@
-class User {
-	private readonly name: string;
+// class User {
+// 	private readonly name: string;
 
-	constructor(name: string) {
-		this.name = name;
-	}
+// 	constructor(name: string) {
+// 		this.name = name;
+// 	}
 
-	sayHello(): string {
-		return `Hello, I am ${this.name}`;
-	}
+// 	sayHello(): string {
+// 		return `Hello, I am ${this.name}`;
+// 	}
 
-	toPrimitive(): { name: string } {
-		return { name: this.name };
-	}
-}
+// 	toPrimitive(): { name: string } {
+// 		return { name: this.name };
+// 	}
+// }
 
-export default User;
+// export default User;
