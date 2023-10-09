@@ -4,7 +4,7 @@
   "description": "ToDoList with mongodb and testing",
   "main": "./src/backend/server.start.ts",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node dist/src/backend/server.start.js",
+    "start": "node dist/src/backend/server.start.js",
     "development": "cross-env NODE_ENV=development nodemon index.js",
     "test": "cross-env NODE_ENV=test PORT=1234 jest --verbose --silent",
     "test:watch": "npm run test -- --watchAll",
@@ -38,7 +38,7 @@
   "dependencies": {
     "bcrypt": "5.1.1",
     "cors": "2.8.5",
-    "crossenv": "0.0.2-security",
+    "crossenv": "^0.0.2-security",
     "dotenv": "16.0.3",
     "express": "4.18.2",
     "express-promise-router": "4.1.1",

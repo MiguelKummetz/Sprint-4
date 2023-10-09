@@ -1,6 +1,8 @@
 import express from 'express'
+import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 import { Note } from '../models/Note'
+import { User } from '../models/User'
 export const notesRouter = express.Router()
 
 notesRouter.get('/',async (_req: Request, res: Response) => {
@@ -11,7 +13,7 @@ notesRouter.get('/',async (_req: Request, res: Response) => {
       res.json(notes)
 })
 
-notesRouter.get('/:id', (req: Request, res: Response, next: any) => {
+notesRouter.get('/:id', (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params
     Note.findById(id).then(note => {
       if (note) {
@@ -22,30 +24,30 @@ notesRouter.get('/:id', (req: Request, res: Response, next: any) => {
     }).catch(err => { next(err) })
   })
 
-notesRouter.post('/', async (req: Request, res: Response, next: any) => {
+notesRouter.post('/', async (req: Request, res: Response, next: NextFunction) => {
     const {
       content,
       important = false
     } = req.body
   
-    const authorization = req.get('authorization')
-    let token = ''
-    if (authorization && authorization.toLowerCase().startsWith('bearer')) {
-      token = authorization.substring(7)
-    }
-    let decodedToken = {}
-    try {
-      decodedToken = jwt.verify(token, process.env.SECRET)
-    } catch (e) {
-      next(e)
-    }
+    // const authorization = req.get('authorization')
+    // let token = ''
+    // if (authorization && authorization.toLowerCase().startsWith('bearer')) {
+    //   token = authorization.substring(7)
+    // }
+    // let decodedToken = {}
+    // try {
+    //   decodedToken = jwt.verify(token, process.env.SECRET)
+    // } catch (e) {
+    //   next(e)
+    // }
   
-    if (!token || !decodedToken.id) {
-      return res.status(401).json({ error: 'token missing or invalid' })
-    }
+    // if (!token || !decodedToken.id) {
+    //   return res.status(401).json({ error: 'token missing or invalid' })
+    // }
   
-    const { id: userId } = decodedToken
-    const user = await User.findById(userId)
+    // const { id: userId } = decodedToken
+    // const user = await User.findById(userId)
   
     if (!content) {
       return res.status(400).json({
@@ -57,14 +59,14 @@ notesRouter.post('/', async (req: Request, res: Response, next: any) => {
       content,
       date: new Date(), // .toISOString()
       important,
-      user: user._id // user.toJSON().id
+      // user: user._id // user.toJSON().id
     })
   
     try {
       const savedNote = await newNote.save()
   
-      user.notes = user.notes.concat(savedNote._id)
-      await user.save()
+      // user.notes = user.notes.concat(savedNote._id)
+      // await user.save()
   
       res.json(savedNote)
     } catch (e) {
@@ -72,7 +74,7 @@ notesRouter.post('/', async (req: Request, res: Response, next: any) => {
     }
   })
   
-notesRouter.put('/:id', async (req: Request, res: Response, next: any) => {
+notesRouter.put('/:id', async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params
     const note = req.body
   
@@ -92,7 +94,7 @@ notesRouter.put('/:id', async (req: Request, res: Response, next: any) => {
     }
   })
 
-notesRouter.delete('/:id', async (req: Request, res: Response, next: any) => {
+notesRouter.delete('/:id', async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params
   
     try {
