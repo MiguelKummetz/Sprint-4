@@ -8,7 +8,7 @@ notesRouter.get('/',async (_req: Request, res: Response) => {
         username: 1,
         name: 1
       })
-      res.json()
+      res.json(notes)
 })
 
 notesRouter.get('/:id', (req: Request, res: Response, next: any) => {
