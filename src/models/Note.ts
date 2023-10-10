@@ -1,6 +1,12 @@
 import mongoose from 'mongoose'
 const { model, Schema } = mongoose
 
+// export default interface NoteType {
+//   content: string,
+//   date: string, // .toISOString()
+//   important: boolean,
+// }
+
 const noteSchema = new Schema({
   content: String,
   date: Date,
@@ -12,7 +18,7 @@ const noteSchema = new Schema({
 })
 
 noteSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
+  transform: (_document, returnedObject) => {
     returnedObject.id = returnedObject._id
     delete returnedObject._id
     delete returnedObject.__v
