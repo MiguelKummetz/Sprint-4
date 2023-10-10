@@ -5,10 +5,10 @@ const noteSchema = new Schema({
   content: String,
   date: Date,
   important: Boolean,
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  }
+  // user: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User'
+  // }
 })
 
 noteSchema.set('toJSON', {

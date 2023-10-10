@@ -6,10 +6,11 @@ import { User } from '../models/User'
 export const notesRouter = express.Router()
 
 notesRouter.get('/',async (_req: Request, res: Response) => {
-    const notes = await Note.find({}).populate('user', {
-        username: 1,
-        name: 1
-      })
+    const notes = await Note.find({})
+    // .populate('user', {
+    //     username: 1,
+    //     name: 1
+    //   })
       res.json(notes)
 })
 
