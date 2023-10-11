@@ -61,16 +61,16 @@ describe('testing POST', () => {
             name: "POST",
             password: "1234"
         }
-    
+
         await api
-          .post('/api/user')
-          .send(newUser)
-          .expect(400)
-    
+            .post('/api/users')
+            .send(newUser)
+            .expect(400)
+
         const { response } = await getAllContentFromUsers()
-    
+
         expect(response.body).toHaveLength(initialUsers.length)
-      })
+    })
 })
 
 afterAll(() => {

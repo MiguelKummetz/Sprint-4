@@ -1,8 +1,6 @@
 import express from 'express'
 import { Request, Response, NextFunction } from 'express'
-import jwt from 'jsonwebtoken'
 import { Note } from '../models/Note'
-import { User } from '../models/User'
 export const notesRouter = express.Router()
 
 notesRouter.get('/',async (_req: Request, res: Response) => {

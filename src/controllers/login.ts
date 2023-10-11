@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import express from 'express'
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response } from 'express'
 import { User } from '../models/User'
 export const loginRouter = express.Router()
 
@@ -11,6 +11,7 @@ export const loginRouter = express.Router()
 //     name: string,
 //     password: string,
 // }
+
 loginRouter.post('/',async (req: Request, res: Response) => {
   const { body } = req
   const { username, password } = body //as Usuario

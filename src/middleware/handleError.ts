@@ -1,24 +1,18 @@
-import express from 'express'
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response } from 'express'
 
-const ERROR_HANDLERS = {
-  CastError: (res: Response, _error: Error) => res.status(400).send({ error: 'id used is malformed' }),
-  
-  ValidationError: (res: Response, error: Error) => res.status(409).send({ error }),
-  
-  JsonWebTokenError: (res: Response) => res.status(401).send({ error: 'invalid token' }),
-  
-  defaultError: (res: Response) => res.status(500).end()
-  }
-  
-  export const handlerError = (error: Error, _request: Request, response: Response, next: NextFunction) => {
+export const handlerError = (error: Error, _req: Request, res: Response) => {
     console.log('ERROR NAME => ' + error.name)
-    console.error(error.name)
   
-  const handler =
-    //ERROR_HANDLERS[error.name] || 
-    ERROR_HANDLERS.defaultError
-  
-    handler(response) //,error
+    if (error.name === 'CastError') {
+      res.status(400).send({ error: 'id used is malformed' })
+
+    } else if (error.name === 'ValidationError') {
+      res.status(401).json({ error: 'invalid token' })
+
+    } else if (error.name === 'JsonWebTokenError') {
+      res.status(409).send({ error: error.message })
+
+    } else {
+      res.status(500).end()
+    }
   }
-  
