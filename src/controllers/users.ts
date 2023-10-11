@@ -18,6 +18,11 @@ usersRouter.post('/',async (req: Request, res: Response) => {
   const { body } = req
   const { username, name, password } = body
 
+  if (!username) {
+    return res.status(400).json({
+      error: 'required "username" field is missing'
+    })
+  }
   const saltRounds = 10
   const passwordHash = await bcrypt.hash(password, saltRounds)
   const user = new User({

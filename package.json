@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node dist/src/backend/server.start.js",
     "dev": "tsc && NODE_ENV=dev node dist/src/backend/server.start.js",
-    "test": "cross-env NODE_ENV=test PORT=1234 jest --verbose --silent",
+    "test": "cross-env NODE_ENV=test PORT=9000 jest --silent --maxWorkers=1 ./tests",
     "test:watch": "npm run test -- --watchAll",
     "build": "rimraf dist && tsc"
   },

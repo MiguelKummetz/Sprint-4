@@ -7,10 +7,10 @@ const userSchema = new Schema({
   },
   name: String,
   passwordHash: String,
-  notes: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Note'
-  }]
+  // notes: [{
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Note'
+  // }]
 })
 
 userSchema.set('toJSON', {

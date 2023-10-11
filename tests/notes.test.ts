@@ -1,11 +1,10 @@
 import mongoose from "mongoose"
-import { server } from '../src/backend/server.start'
 import { Note } from "../src/models/Note" 
-import { api, initialNotes, getAllContentFromNotes } from './helpers'
+import { initialNotes, getAllContentFromNotes, api } from './helpers'
+import { server } from "../src/backend/server.start"
 
 beforeEach(async () => {
   await Note.deleteMany({})
-
   for (const note of initialNotes) {
     const notesObject = new Note(note)
     await notesObject.save()

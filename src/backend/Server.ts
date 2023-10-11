@@ -17,5 +17,3 @@ export const connectDB = () => {
     mongoose.connection.close()
   })
 }
-
-//'mongodb+srv://ami:1234@cluster0.kyprtz4.mongodb.net/notes-app?retryWrites=true&w=majority'
