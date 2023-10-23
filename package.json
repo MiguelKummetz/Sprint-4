@@ -4,7 +4,7 @@
   "description": "ToDoList with mongodb and testing",
   "main": "./src/backend/server.start.ts",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node dist/src/backend/server.start.js",
+    "start": "cross-env NODE_ENV=production tsc && node dist/src/backend/server.start.js",
     "dev": "tsc && NODE_ENV=dev node dist/src/backend/server.start.js",
     "test": "cross-env NODE_ENV=test PORT=9000 jest --silent --maxWorkers=1 ./tests",
     "test:watch": "npm run test -- --watchAll",
