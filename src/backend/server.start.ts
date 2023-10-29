@@ -9,6 +9,7 @@ import { usersRouter } from '../controllers/users'
 import { handlerError } from '../middleware/handleError'
 import { loginRouter } from '../controllers/login'
 import { app } from './app'
+import { playerRouter } from '../_infrastructure/controllers/playerRouter'
 
 // import { loginRouter } from '../controllers/login'
 connectDB()
@@ -20,6 +21,7 @@ app.get('/', (_req, res) => {
 	res.send('<h1>Hello World</h1>')
   })
 
+  app.use('/api/players', playerRouter)
   app.use('/api/notes', notesRouter)
   app.use('/api/users', usersRouter)
   app.use('/api/login', loginRouter)
